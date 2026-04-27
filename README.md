@@ -75,6 +75,31 @@ Następnie naciśnij Cmd+V – powinno pojawić się "test".
 2. Przetestuj mostek ręcznie (patrz wyżej)
 3. Upewnij się, że używasz y, a nie Enter
 
+### Skróty do podziału okien (Ctrl+B % i Ctrl+B ") nie działają
+
+Po zastosowaniu tej konfiguracji domyślne skróty tmux do podziału okien mogą przestać działać, ponieważ zostały zastąpione wygodniejszymi:
+
+Stary skrót -> Nowy skrót:
+- Ctrl+B %   -> Ctrl+B | (pionowy podział, lewo/prawo)
+- Ctrl+B "   -> Ctrl+B - (poziomy podział, góra/dół)
+
+Aby przywrócić stare skróty, dodaj na końcu pliku ~/.tmux.conf te dwie linie:
+
+bind-key -T prefix % split-window -h
+bind-key -T prefix '"' split-window -v
+
+Następnie przeładuj konfigurację:
+
+tmux source-file ~/.tmux.conf
+
+Lub zrestartuj tmux:
+
+tmux kill-server
+tmux
+
+Po restarcie oba zestawy skrótów będą działać.
+
+
 **Cmd+V nie wkleja?**
 Upewnij się, że w ~/.tmux.conf jest linia: set -g extended-keys off
 
